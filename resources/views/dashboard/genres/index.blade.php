@@ -35,7 +35,7 @@
                                         style="color: #5e676f"
                                         type="button"
                                         onclick="alertAndSubmit(
-                                                'Pas fshierjes së zhanrit {{$genre->name}}, ju nuk do të jeni në gjendje ta riktheni atë!',
+                                                'Pas fshierjes së zhanrit {{$genre->title}}, ju nuk do të jeni në gjendje ta riktheni atë!',
                                                 'Fshi zhanrin!',
                                                 '#delete-genre-{{$genre->genre_id}}'
                                                 )">

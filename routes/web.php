@@ -21,17 +21,19 @@ Route::middleware([
 Route::prefix('/dashboard')
     ->middleware([
         'auth',
-        'admin'
+        'manager'
     ])->namespace('Dashboard')->group(function() {
 
         Route::redirect("/", "/dashboard/statistics");
 
         Route::get("/statistics","StatisticController@index");
-
-        Route::resource('/users','UserController');
         Route::resource('/songs','SongController');
-        Route::resource('/roles','RoleController');
         Route::resource('/artists','ArtistController');
         Route::resource('/genres','GenreController');
-        Route::resource('/subscriptions','SubscriptionController');
+
+        Route::middleware('admin')->group(function() {
+            Route::resource('/users','UserController');
+            Route::resource('/roles','RoleController');
+            Route::resource('/subscriptions','SubscriptionController');
+        });
 });

@@ -16,7 +16,8 @@ class CreateArtistTable extends Migration
         Schema::create('artist', function (Blueprint $table) {
             $table->increments('artist_id');
             $table->string('full_name', 255);
-            $table->string('href', 255);
+            $table->string('href', 255)->unique();
+            $table->string('image', 255)->nullable();
             $table->timestamps();
         });
     }

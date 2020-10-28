@@ -12,4 +12,9 @@ class SongArtist extends Model
     protected $table = 'song_artist';
 
     protected $primaryKey = 'id';
+
+    protected $fillable = [
+        'song_id',
+        'artist_id'
+    ];
 }

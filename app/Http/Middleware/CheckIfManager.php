@@ -6,7 +6,7 @@ use App\Models\User;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
-class CheckIfAdmin
+class CheckIfManager
 {
     /**
      * Handle an incoming request.
@@ -18,7 +18,7 @@ class CheckIfAdmin
     public function handle($request, Closure $next)
     {
         $user = User::with('role')->findOrFail(Auth::id());
-        if($user->role->title == 'admin')
+        if($user->role->title == 'admin' || $user->role->title == "manager")
             return $next($request);
         else
             return abort(404);

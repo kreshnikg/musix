@@ -27,13 +27,13 @@ class SidebarItem extends Component
      * @param $link
      * @param $title
      * @param $icon
-     * @param bool|null $forSupervisor
+     * @param bool|null $forManager
      * @param bool $newTab
      * @param bool $externalUrl
      */
-    public function __construct($link, $title, $icon, $forSupervisor = null,$newTab = false, $externalUrl = false)
+    public function __construct($link, $title, $icon, $forManager = null,$newTab = false, $externalUrl = false)
     {
-        if($forSupervisor == null) {
+        if($forManager == null) {
             if(Auth::user()->role_id == 1) {
                 $this->visible = true;
             }

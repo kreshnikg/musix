@@ -67,7 +67,7 @@ class RegisterController extends Controller
     {
         $role = Role::where('title','customer')->select('role_id')->firstOrfail();
         return User::create([
-            'name' => $data['name'],
+            'full_name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'role_id' => $role->role_id

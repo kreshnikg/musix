@@ -13,4 +13,8 @@ class ArtistGenre extends Model
 
     protected $primaryKey = 'id';
 
+    protected $fillable = [
+        'artist_id',
+        'genre_id'
+    ];
 }

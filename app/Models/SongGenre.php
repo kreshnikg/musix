@@ -12,4 +12,9 @@ class SongGenre extends Model
     protected $table = 'song_genre';
 
     protected $primaryKey = 'id';
+
+    protected $fillable = [
+        'song_id',
+        'genre_id'
+    ];
 }

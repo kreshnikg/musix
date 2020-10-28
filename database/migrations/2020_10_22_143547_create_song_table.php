@@ -16,7 +16,8 @@ class CreateSongTable extends Migration
         Schema::create('song', function (Blueprint $table) {
             $table->increments('song_id');
             $table->string('title', 255);
-            $table->string('href', 255);
+            $table->string('href', 255)->unique();
+            $table->string('audio_file', 255);
             $table->integer('duration');
             $table->date('release_date');
             $table->unsignedInteger('total_play_count')->default(0);

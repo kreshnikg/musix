@@ -12,4 +12,16 @@ class Song extends Model
     protected $table = 'song';
 
     protected $primaryKey = 'song_id';
+
+    public function artists()
+    {
+        return $this->hasManyThrough(
+            'App\Models\Artist',
+            'App\Models\SongArtist',
+            'song_id',
+            'artist_id',
+            'song_id',
+            'artist_id'
+        );
+    }
 }

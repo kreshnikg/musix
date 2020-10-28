@@ -13,5 +13,27 @@ class Artist extends Model
 
     protected $primaryKey = 'artist_id';
 
+    public function genres()
+    {
+        return $this->hasManyThrough(
+            'App\Models\Genre',
+            'App\Models\ArtistGenre',
+            'artist_id',
+            'genre_id',
+            'artist_id',
+            'genre_id'
+        );
+    }
 
+    public function songs()
+    {
+        return $this->hasManyThrough(
+            'App\Models\Song',
+            'App\Models\SongArtist',
+            'artist_id',
+            'song_id',
+            'artist_id',
+            'song_id'
+        );
+    }
 }

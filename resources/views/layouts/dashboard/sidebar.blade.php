@@ -6,7 +6,8 @@
 
         <x-sidebar-item title="Statistikat"
                         link="/statistics"
-                        icon="fas fa-chart-line"></x-sidebar-item>
+                        icon="fas fa-chart-line"
+                        for-manager="1"></x-sidebar-item>
 
         <x-sidebar-item title="Përdoruesit"
                         link="/users"
@@ -14,15 +15,18 @@
 
         <x-sidebar-item title="Këngët"
                         link="/songs"
-                        icon="fas fa-music"></x-sidebar-item>
+                        icon="fas fa-music"
+                        for-manager="1"></x-sidebar-item>
 
         <x-sidebar-item title="Artistët"
                         link="/artists"
-                        icon="fas fa-microphone"></x-sidebar-item>
+                        icon="fas fa-microphone"
+                        for-manager="1"></x-sidebar-item>
 
         <x-sidebar-item title="Zhanret"
                         link="/genres"
-                        icon="fas fa-list-ul"></x-sidebar-item>
+                        icon="fas fa-list-ul"
+                        for-manager="1"></x-sidebar-item>
 
         <x-sidebar-item title="Abonimet"
                         link="/subscriptions"
