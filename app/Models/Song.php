@@ -24,4 +24,16 @@ class Song extends Model
             'artist_id'
         );
     }
+
+    public function genres()
+    {
+        return $this->hasManyThrough(
+            'App\Models\Genre',
+            'App\Models\SongGenre',
+            'song_id',
+            'genre_id',
+            'song_id',
+            'genre_id'
+        );
+    }
 }

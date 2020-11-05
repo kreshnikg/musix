@@ -123,7 +123,14 @@ class SongController extends Controller
      */
     public function edit($id)
     {
-        return view('dashboard.songs.edit');
+        $song = Song::with(['genres', 'artists'])->findOrFail($id);
+        $genres = Genre::all();
+        $artists = Artist::all();
+        return view('dashboard.songs.edit', [
+            "song" => $song,
+            "genres" => $genres,
+            "artists" => $artists,
+        ]);
     }
 
     /**
@@ -135,7 +142,57 @@ class SongController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'title' => ["required", "string", "max:200"],
+            'release_date' => ["required", "date"],
+            'artists' => ["required", "array"],
+            'genres' => ["required", "array"],
+            'audio_file' => ["mimes:mp3"],
+        ]);
+
+        $song = Song::findOrFail($id);
+
+        $path = null;
+        if($request->hasFile('audio_file')) {
+            $audioFile = $request->file('audio_file');
+            $extension = $audioFile->getClientOriginalExtension();
+            $fileNameToStore = Str::uuid() . '.' . $extension;
+            $path = $audioFile->storeAs('songs', $fileNameToStore);
+        }
+
+        \DB::transaction(function () use ($request, $path, $song) {
+            $song->title = $request->input('title');
+            $song->href = toURL($song->title);
+            $song->release_date = $request->input('release_date');
+            if($path) {
+                $song->audio_file = $path;
+                $song->duration = $request->input('audio_file_duration');
+            }
+            $song->save();
+
+            $genreIds = $request->input('genres');
+            $artistIds = $request->input('artists');
+
+            $genres = Genre::select('genre_id')->find($genreIds);
+            SongGenre::where('song_id', $song->song_id)->delete();
+            foreach ($genres as $genre) {
+                SongGenre::create([
+                    "song_id" => $song->song_id,
+                    "genre_id" => $genre->genre_id
+                ]);
+            }
+
+            $artists = Artist::select('artist_id')->find($artistIds);
+            SongArtist::where('song_id', $song->song_id)->delete();
+            foreach ($artists as $artist) {
+                SongArtist::create([
+                    "song_id" => $song->song_id,
+                    "artist_id" => $artist->artist_id
+                ]);
+            }
+        });
+
+        return redirect('/dashboard/songs')->with('success', "Ndryshimet u ruajtën me sukses.");
     }
 
     /**

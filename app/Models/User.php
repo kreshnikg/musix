@@ -2,14 +2,16 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable;
 
     protected $primaryKey = 'user_id';
 
@@ -43,6 +45,24 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Check if user subscribed
+     *
+     * @return mixed
+     */
+    public function subscribed()
+    {
+        return Subscription::where('user_id', $this->user_id)->valid()->exists();
+    }
+
+    public function subscribe()
+    {
+        $subscription = new Subscription;
+        $subscription->user_id = $this->user_id;
+        $subscription->ends_at = Carbon::now()->addMonth();
+        $subscription->save();
+    }
 
     public function role()
     {

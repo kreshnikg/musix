@@ -4,9 +4,10 @@ namespace App\Http\Middleware;
 
 use App\Models\User;
 use Closure;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class CheckIfManager
+class Subscribed
 {
     /**
      * Handle an incoming request.
@@ -15,12 +16,11 @@ class CheckIfManager
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next)
     {
-        $user = User::with('role')->findOrFail(Auth::id());
-        if($user->role->title == 'admin' || $user->role->title == "manager")
+        $user = User::findOrFail(Auth::id());
+        if($user->subscribed())
             return $next($request);
-        else
-            return abort(404);
+        else return redirect('/subscribe');
     }
 }

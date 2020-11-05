@@ -10,13 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-@php($subscribed = Auth::check() && Auth::user()->subscribed())
-<body style="{{ $subscribed ? "background-color: #171e31 !important" : "" }}">
-    @if($subscribed)
-        <div id="app"></div>
-    @else
-        <div id="guest"></div>
-        @yield('content')
-    @endauth
+<body>
+    <div id="subscribe"></div>
 </body>
 </html>
