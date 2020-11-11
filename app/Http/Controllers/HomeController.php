@@ -16,7 +16,8 @@ class HomeController extends Controller
         if(\Auth::check()) {
             if(!\Auth::user()->subscribed())
                 return redirect('/subscribe');
-        }
-        return view('layouts.app');
+            return view('layouts.app');
+        } else
+            return redirect('/login');
     }
 }

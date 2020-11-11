@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\Subscription;
 use Illuminate\Http\Request;
 
 class SubscriptionController extends Controller
@@ -14,7 +15,10 @@ class SubscriptionController extends Controller
      */
     public function index()
     {
-        //
+        $subscriptions = Subscription::with('user')->latest()->paginate(15);
+        return view('dashboard.subscriptions.index', [
+            "subscriptions" => $subscriptions
+        ]);
     }
 
     /**

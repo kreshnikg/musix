@@ -1,14 +1,20 @@
 version: "3.8"
 services:
   php:
-    image: php:7.4-apache
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: custom-php
+    restart: unless-stopped
+    volumes:
+      -
 
   db:
     image: mysql:8.0.21
     command: --default-authentication-plugin=mysql_native_password
     restart: always
     volumes:
-    - db-data:/var/lib/mysql
+      - db-data:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD:
 

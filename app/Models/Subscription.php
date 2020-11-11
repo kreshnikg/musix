@@ -18,4 +18,9 @@ class Subscription extends Model
     {
         return $query->where('ends_at', '>', Carbon::now());
     }
+
+    public function user()
+    {
+        return $this->hasOne('App\Models\User', 'user_id', 'user_id');
+    }
 }

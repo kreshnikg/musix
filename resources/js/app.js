@@ -8,4 +8,5 @@ require('./bootstrap');
 require('select2');
 require("./custom");
 require("./components/Subscribe");
+require("./components/App");
 
