@@ -13,11 +13,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if(\Auth::check()) {
+        if(\Auth::check())
             if(!\Auth::user()->subscribed())
                 return redirect('/subscribe');
-            return view('layouts.app');
-        } else
-            return redirect('/login');
+
+        return view('layouts.app');
     }
 }

@@ -1,22 +1,48 @@
-version: "3.8"
+version: "3"
+
 services:
-  php:
+  app:
     build:
-      context: .
+      args:
+        user: kreshnik
+        uid: 1000
+      context: ./
       dockerfile: Dockerfile
-    image: custom-php
+    image: musix
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
     restart: unless-stopped
+    working_dir: /var/www
+    container_name: musix-app
     volumes:
-      -
+      - .:/var/www
 
   db:
     image: mysql:8.0.21
+    container_name: musix-db
     command: --default-authentication-plugin=mysql_native_password
     restart: always
     volumes:
       - db-data:/var/lib/mysql
+      - ./docker/mysql:/docker-entrypoint-initdb.d
     environment:
-      MYSQL_ROOT_PASSWORD:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+
+  nginx:
+    build:
+      context: .
+      dockerfile: nginx.Dockerfile
+    container_name: musix-nginx
+    restart: unless-stopped
+    ports:
+      - 8000:80
+    volumes:
+      - .:/var/www
 
 volumes:
   db-data:

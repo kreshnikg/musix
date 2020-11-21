@@ -28,6 +28,7 @@
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.15.1",
         "@sweetalert/with-react": "^0.1.1",
+        "howler": "^2.2.1",
         "moment": "^2.29.1",
         "select2": "^4.0.13",
         "sweetalert": "^2.1.2"

@@ -1,9 +1,8 @@
 import React, {useState, useEffect, useRef} from 'react';
-import ReactDOM from 'react-dom';
 import axios from 'axios';
 import moment from "moment";
 
-function Subscribe(props) {
+export default function Subscribe(props) {
 
     let cardNumber = useRef(null);
     let cardSecurityCode = useRef(null);
@@ -92,7 +91,7 @@ function Subscribe(props) {
     )
 }
 
-if (document.getElementById('subscribe')) {
-    ReactDOM.render(<Subscribe/>, document.getElementById('subscribe'));
-}
+// if (document.getElementById('subscribe')) {
+//     ReactDOM.render(<Subscribe/>, document.getElementById('subscribe'));
+// }
 

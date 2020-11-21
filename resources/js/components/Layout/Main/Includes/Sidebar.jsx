@@ -15,7 +15,7 @@ export default function Sidebar(props) {
                     {/*<img alt="logo" src="/storage/img/ciaoberto-logo-black.svg" className="my-2" width="150"/>*/}
                 </li>
 
-                <SidebarItem title="Këngët"
+                <SidebarItem title="Të fundit"
                              link="/"
                              active
                              icon="fas fa-music"/>
@@ -24,7 +24,7 @@ export default function Sidebar(props) {
                              link="/browse"
                              icon="fas fa-search"/>
 
-                <SidebarItem title="Këngët e preferuara"
+                <SidebarItem title="Të preferuara"
                              link="/favourites"
                              icon="far fa-heart"/>
 

@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import Sidebar from "./Includes/Sidebar";
 import Topbar from "./Includes/Topbar";
+import Player from "../../Player/Player";
 
-export default function Main(props) {
+export default function MainLayout(props) {
 
     useEffect(() => {
 
@@ -15,6 +16,7 @@ export default function Main(props) {
             <div className="content">
                 {props.children}
             </div>
+            <Player />
         </>
     )
 }
