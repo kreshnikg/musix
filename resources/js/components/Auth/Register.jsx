@@ -9,13 +9,16 @@ const Register = (props) => {
     let password = React.createRef();
 
     const registerRequest = () => {
-        axios.post('/api/register', {
+        axios.post('/register', {
             name: name.current.value,
             email: email.current.value,
             password: password.current.value
+        },{
+            headers: {
+                "Accept": "application/json"
+            }
         }).then(response => {
-            if (response.data === "success")
-                window.location.href = "/";
+                window.location.href = "/subscribe";
         }).catch(error => {
 
         })
@@ -24,9 +27,9 @@ const Register = (props) => {
     return (
         <div className="container">
             <div className="row">
-                <div className="card overflow-hidden my-card-shadow mx-auto my-5 w-75">
+                <div className="card overflow-hidden border-0 shadow-sm mx-auto my-5 w-75">
                     <div className="card-body p-0">
-                        <div className="row">
+                        <div className="row no-gutters">
                             <div className="col-lg-6 d-none d-lg-block bg-login-image"/>
                             <div className="col-lg-6">
                                 <div className="p-5">
@@ -34,7 +37,7 @@ const Register = (props) => {
                                         <h4 className="h4 mb-4">Mirë se erdhët!</h4>
                                     </div>
                                     <div className="row">
-                                        <div className="col-6">
+                                        <div className="col-12">
                                             <input ref={name} type="text" className="form-control mb-3 login-input"
                                                    placeholder="Emri" required/>
                                         </div>
@@ -43,14 +46,10 @@ const Register = (props) => {
                                            placeholder="Email"
                                            required/>
                                     <div className="row">
-                                        <div className="col-6">
+                                        <div className="col-12">
                                             <input ref={password} type="password"
                                                    className="form-control mb-3 login-input"
-                                                   placeholder="Fjalkalimi" required/>
-                                        </div>
-                                        <div className="col-6">
-                                            <input type="password" className="form-control mb-3 login-input"
-                                                   placeholder="Konfirmo fjalkalimin" required/>
+                                                   placeholder="Fjalëkalimi" required/>
                                         </div>
                                     </div>
                                     <div className="form-group form-check">
@@ -59,11 +58,11 @@ const Register = (props) => {
                                             përdorimit</label>
                                     </div>
                                     <button type="button" onClick={registerRequest}
-                                            className="btn btn-block login-btn my-btn-primary-color">Regjistrohu
+                                            className="btn btn-block my-btn-primary-color btn-rounded">Regjistrohu
                                     </button>
                                     <hr/>
                                     <div className="text-center">
-                                        <Link className="small" style={{textDecoration: "none", color: "#9c68aa"}}
+                                        <Link className="small" style={{textDecoration: "none", color: "#da1c78"}}
                                               to="login">Keni llogari? Identifikohu këtu!</Link>
                                     </div>
                                 </div>

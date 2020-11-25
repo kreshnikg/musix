@@ -8,7 +8,7 @@ Auth::routes();
 
 Route::middleware('auth')->group(function () {
 
-    Route::get('/subscribe','SubscriptionController@index');
+    Route::get('/subscribe','HomeController@index');
 
     Route::middleware([
         'role:consumer',

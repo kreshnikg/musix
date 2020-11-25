@@ -93,8 +93,10 @@
     .sidebar .sidebar-item.active {
         /*border-left: 4px solid #fff;*/
         /*background-color: rgba(255, 255, 255, 0.11);*/
-        border-left: 4px solid #313a46;
-        background-color: rgba(49, 58, 70, 0.05);
+        //border-left: 4px solid #313a46;
+        //background-color: rgba(49, 58, 70, 0.05);
+        border-left: 4px solid #da1c78;
+        //background-color: rgb(218, 28, 120, 0.05);
     }
 
     .sidebar .sidebar-item.active a {
@@ -223,14 +225,14 @@
     }
 
     .my-btn-primary-color {
-        background-color: #313a46 !important;
-        border-color: #313a46 !important;
+        background-color: #da1c78 !important;
+        border-color: #da1c78 !important;
     }
 
     .my-btn-primary-color:hover {
         transition-duration: 0.3s;
-        background-color: #272f37 !important;
-        border-color: #272f37 !important;
+        background-color: #da1c78 !important;
+        border-color: #da1c78 !important;
     }
 
     .my-table {

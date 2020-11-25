@@ -1,8 +1,8 @@
 <div id="sidebar" class="sidebar border-0">
     <ul class="p-0">
         <li class="d-flex justify-content-center my-4">
-            <h4 class="m-0">MUSIX</h4>
-{{--            <img alt="logo" src="/storage/img/ciaoberto-logo-black.svg" class="my-2" width="150"/>--}}
+{{--            <h4 class="m-0">MUSIX</h4>--}}
+            <img alt="logo" src="/storage/img/logo.svg" class="my-1" width="100"/>
         </li>
 
         <x-sidebar-item title="Statistikat"

@@ -17,13 +17,13 @@ function Guest(props) {
 
     return (
         <BrowserRouter>
-            <GuestLayout>
+            <GuestLayout loggedIn={props.loggedIn}>
                 <ScrollToTop />
                 <Switch>
-                    <Route exact path='/' component={Home}/>
-                    {/*<Route exact path='/login' component={Login}/>*/}
-                    {/*<Route exact path='/register' component={Register}/>*/}
-                    {/*<Route exact path='/subscribe' component={Subscribe}/>*/}
+                    <Route exact path='/' render={() => <Home loggedIn={props.loggedIn} />}/>
+                    <Route exact path='/login' component={Login}/>
+                    <Route exact path='/register' component={Register}/>
+                    <Route exact path='/subscribe' component={Subscribe}/>
                     <Route path="/not-found" component={NotFound} />
                     <Redirect to="/not-found" />
                 </Switch>
@@ -33,5 +33,6 @@ function Guest(props) {
 }
 
 if (document.getElementById('guest')) {
-    ReactDOM.render(<Guest/>, document.getElementById('guest'));
+    let loggedIn = document.getElementById('guest').dataset.auth === "1"
+    ReactDOM.render(<Guest loggedIn={loggedIn}/>, document.getElementById('guest'));
 }

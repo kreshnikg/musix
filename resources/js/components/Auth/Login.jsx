@@ -19,14 +19,20 @@ const Login = (props) => {
             return;
         }
         setError(null);
-        axios.post('/api/login', {email: emailValue, password: passwordValue})
-            .then((response) => {
-                if (response.data === "success")
-                    window.location.href = "/";
-            }).catch((error) => {
-                if (error.response.status === 422) {
-                    setError(error.response.data)
+        axios.post('/login',
+            {
+                email: emailValue,
+                password: passwordValue
+            }, {
+                headers: {
+                    "Accept": "application/json"
                 }
+            }).then((response) => {
+                window.location.href = "/";
+        }).catch((error) => {
+            if (error.response.status === 422) {
+                setError(error.response.data)
+            }
         })
     };
 
@@ -42,9 +48,9 @@ const Login = (props) => {
     return (
         <div className="container">
             <div className="row">
-                <div className="card overflow-hidden my-card-shadow mx-auto my-5 w-75">
+                <div className="card overflow-hidden border-0 shadow-sm mx-auto my-5 w-75">
                     <div className="card-body p-0">
-                        <div className="row">
+                        <div className="row no-gutters">
                             <div className="col-lg-6 d-none d-lg-block bg-login-image"/>
                             <div className="col-lg-6">
                                 <div className="p-5">
@@ -56,17 +62,17 @@ const Login = (props) => {
                                            placeholder="Email" required/>
                                     <input onKeyUp={(e) => onEnter(e)} ref={password} type="password"
                                            className="form-control mb-3 login-input"
-                                           placeholder="Fjalkalimi" required/>
+                                           placeholder="Fjalëkalimi" required/>
                                     <div className="form-group form-check">
                                         <input type="checkbox" id="check" className="form-check-input"/>
                                         <label className="form-check-label" htmlFor="check">Më mbaj në mend</label>
                                     </div>
                                     <button ref={btnLogin} type="button" onClick={loginRequest}
-                                            className="btn btn-block login-btn my-btn-primary-color">Kyçu
+                                            className="btn btn-block my-btn-primary-color btn-rounded">Kyçu
                                     </button>
                                     <hr/>
                                     <div className="text-center">
-                                        <Link className="small" style={{textDecoration: "none", color: "#9c68aa"}}
+                                        <Link className="small" style={{textDecoration: "none", color: "#da1c78"}}
                                               to="/register">Nuk keni llogari? Regjistrohuni këtu!</Link>
                                     </div>
                                 </div>

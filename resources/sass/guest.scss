@@ -1,8 +1,8 @@
 #guest {
   body {
     color: #707070 !important;
-    //background-color: #f8fafc;
-    background-color: white;
+    background-color: #f8fafc;
+    //background-color: white;
   }
 
   .mynav-items-center {
@@ -13,14 +13,14 @@
   }
 
   .my-btn-primary-color {
-    background-color: #9C68AA !important;
-    border-color: #9C68AA !important;
+    background-color: #da1c78 !important;
+    border-color: #da1c78 !important;
     color: white;
   }
 
   .my-btn-primary-color:hover {
     color:white !important;
-    background-color: #7d528b !important;
+    background-color: #b01862 !important;
   }
 
   .btn-no-focus {
@@ -136,9 +136,10 @@
   }
 
   .bg-login-image{
-    //background: url("../img/login.png");
+    background-image: url("/storage/img/headset.svg");
     background-position: center;
-    background-size: cover;
+    background-size: 380px;
+    background-repeat: no-repeat;
   }
 
   .sort-btn{

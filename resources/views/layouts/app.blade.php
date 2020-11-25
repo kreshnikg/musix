@@ -13,8 +13,7 @@
     @if($subscribed)
         <div id="app"></div>
     @else
-        <div id="guest"></div>
-        @yield('content')
+        <div id="guest" data-auth="{{ Auth::check() ? "1" : "0" }}"></div>
     @endauth
 </body>
 </html>
