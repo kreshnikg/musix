@@ -64,8 +64,34 @@ class User extends Authenticatable
         $subscription->save();
     }
 
+    public function addFavourite($song)
+    {
+        UserFavouriteSong::create([
+            'user_id' => $this->user_id,
+            'song_id' => $song->song_id
+        ]);
+    }
+
+    public function removeFavourite($song)
+    {
+        UserFavouriteSong::where('user_id', $this->user_id)
+            ->where('song_id', $song->song_id)->delete();
+    }
+
     public function role()
     {
         return $this->hasOne('App\Models\Role', 'role_id', 'role_id');
+    }
+
+    public function favouriteSongs()
+    {
+        return $this->hasManyThrough(
+            'App\Models\Song',
+            'App\Models\UserFavouriteSong',
+            'user_id',
+            'song_id',
+            'user_id',
+            'song_id'
+        );
     }
 }

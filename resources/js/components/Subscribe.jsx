@@ -40,6 +40,17 @@ export default function Subscribe(props) {
         })
     }
 
+    const creditCardFormat = (e) => {
+        let val = e.target.value
+        let newval = '';
+        val = val.replace(/\s/g, '');
+        for(let i = 0; i < val.length; i++) {
+            if(i%4 == 0 && i > 0) newval = newval.concat(' ');
+            newval = newval.concat(val[i]);
+        }
+        e.target.value = newval;
+    }
+
     return (
         <div className="container">
             <div className="row">
@@ -49,6 +60,7 @@ export default function Subscribe(props) {
                             <label htmlFor="card_number">Numri i kartelës</label>
                             <input className="form-control"
                                    ref={cardNumber}
+                                   onKeyUp={creditCardFormat}
                                    type="text"
                                    id="card_number"
                                    placeholder="1111 2222 3333 4444"/>
@@ -61,7 +73,7 @@ export default function Subscribe(props) {
                                         <option disabled value="">Muaji</option>
                                         {_.range(1, 13).map((month) => {
                                             return <option key={month} value={month}>{month}</option>
-                                        } )}
+                                        })}
                                     </select>
                                 </div>
                                 <div className="col-md-6">
@@ -85,7 +97,11 @@ export default function Subscribe(props) {
                                 </div>
                             </div>
                         </div>
-                        <button className="btn btn-success w-100 mx-10" onClick={subscribeHandler}>Abonohu</button>
+                        <div style={{borderBottom: '1px solid #ddd', borderTop: '1px solid #ddd'}}
+                             className="py-2 text-center font-weight-bold">
+                            4.99 € në muaj
+                        </div>
+                        <button className="btn btn-success w-100 mt-3" onClick={subscribeHandler}>Abonohu</button>
                     </div>
                 </div>
             </div>

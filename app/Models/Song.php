@@ -13,6 +13,14 @@ class Song extends Model
 
     protected $primaryKey = 'song_id';
 
+    public function scopeFavourited($query, $userId)
+    {
+        return $query->selectRaw(
+            '*, EXISTS(SELECT * FROM user_favourite_song WHERE user_id = ? AND song_id = song.song_id) as is_favourited',
+            [$userId]
+        );
+    }
+
     public function artists()
     {
         return $this->hasManyThrough(
@@ -34,6 +42,15 @@ class Song extends Model
             'genre_id',
             'song_id',
             'genre_id'
+        );
+    }
+
+    public function usersFavourite()
+    {
+        return $this->hasMany(
+            'App\Models\UserFavouriteSong',
+            'song_id',
+            'song_id'
         );
     }
 }

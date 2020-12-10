@@ -30,6 +30,10 @@
         "@sweetalert/with-react": "^0.1.1",
         "howler": "^2.2.1",
         "moment": "^2.29.1",
+        "react-howler": "^5.0.0",
+        "react-redux": "^7.2.2",
+        "redux": "^4.0.5",
+        "redux-thunk": "^2.3.0",
         "select2": "^4.0.13",
         "sweetalert": "^2.1.2"
     }

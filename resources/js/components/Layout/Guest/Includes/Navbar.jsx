@@ -24,8 +24,8 @@ const Navbar = ({loggedIn}) => {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav">
-                        <NavItem to="/">Ballina</NavItem>
-                        <NavItem to="/">Rreth nesh</NavItem>
+                        {/*<NavItem to="/">Ballina</NavItem>*/}
+                        {/*<NavItem to="/">Rreth nesh</NavItem>*/}
                     </ul>
                     <div className="d-flex align-items-center ml-auto">
                         {

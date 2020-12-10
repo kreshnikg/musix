@@ -7,7 +7,7 @@
     width: 250px;
     left: 0;
     top: 0;
-    bottom: 0;
+    bottom: 120px;
     position: fixed;
     z-index: 1000;
     overflow-x: hidden;
@@ -29,7 +29,7 @@
       }
 
       &.active a {
-        color: #f54e77 !important;
+        color: #da1c78 !important;
         font-weight: 700;
         margin-left: -4px;
       }
@@ -202,6 +202,80 @@
       border-color: #272f37 !important;
     }
   }
+
+  .song-list-table {
+    background-color: transparent;
+
+    thead th {
+      border-top: 0;
+    }
+
+    .song-row-href {
+      text-decoration: none;
+      color: white;
+
+      .song-play-button {
+        visibility: hidden;
+        font-size: 20px;
+      }
+
+      .song-favourite-button {
+        font-size: 20px;
+      }
+
+      &:hover {
+        color: #da1c78;
+        cursor: pointer;
+
+        .song-play-button {
+          visibility: visible;
+        }
+      }
+    }
+  }
+
+  .player {
+    height: 120px;
+    bottom: 0;
+    width: 100%;
+    background-color: #12192c;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+
+    .control-buttons {
+      display: flex;
+      align-items: center;
+
+      .control-buttons-item {
+        margin: 0 10px;
+        font-size: 20px;
+      }
+    }
+  }
+
+  .text-center-image{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    color: white;
+    font-size: 25px;
+    font-weight: 600;
+  }
+
+  .featured-products {
+    object-fit: cover;
+    filter:brightness(.7);
+    width: 250px;
+    height: 250px;
+  }
+
+
+
+
+
+
 
   .Root__now-playing-bar {
     grid-area: now-playing-bar;

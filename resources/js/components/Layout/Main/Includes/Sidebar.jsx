@@ -1,7 +1,9 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import SidebarItem from "./SidebarItem";
 
 export default function Sidebar(props) {
+
+    let logoutForm = useRef(null);
 
     useEffect(() => {
 
@@ -11,13 +13,12 @@ export default function Sidebar(props) {
         <div id="sidebar" className="sidebar border-0">
             <ul className="p-0">
                 <li className="d-flex justify-content-center my-4">
-                    <h4>MUSIX</h4>
-                    {/*<img alt="logo" src="/storage/img/ciaoberto-logo-black.svg" className="my-2" width="150"/>*/}
+                    {/*<h4>MUSIX</h4>*/}
+                    <img alt="logo" src="/storage/img/logo.svg" className="my-1" width="100"/>
                 </li>
 
                 <SidebarItem title="Të fundit"
                              link="/"
-                             active
                              icon="fas fa-music"/>
 
                 <SidebarItem title="Shfleto"
@@ -31,6 +32,16 @@ export default function Sidebar(props) {
                 <SidebarItem title="Artistët"
                              link="/artists"
                              icon="far fa-user"/>
+
+                <li className="sidebar-item position-absolute w-100 text-center" style={{bottom: "20px"}}>
+                    <form method="POST" action="/logout" id="logout-form" ref={logoutForm}>
+                        <input type="hidden" name="_token" value={getCSRFToken()}/>
+                        <a className="sidebar-link" onClick={() => logoutForm.current.submit()}>
+                            <i className="fas fa-sign-out-alt fa-fw"/>
+                            <span className="ml-2">Çkyçu</span>
+                        </a>
+                    </form>
+                </li>
             </ul>
         </div>
     )

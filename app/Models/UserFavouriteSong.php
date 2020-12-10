@@ -12,4 +12,9 @@ class UserFavouriteSong extends Model
     protected $table = 'user_favourite_song';
 
     protected $primaryKey = 'id';
+
+    protected $fillable = [
+        'user_id',
+        'song_id'
+    ];
 }

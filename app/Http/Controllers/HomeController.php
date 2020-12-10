@@ -22,4 +22,9 @@ class HomeController extends Controller
 
         return view('layouts.app');
     }
+
+    public function mainView()
+    {
+        return view('layouts.app');
+    }
 }

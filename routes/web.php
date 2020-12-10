@@ -11,10 +11,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/subscribe','HomeController@index');
 
     Route::middleware([
-        'role:consumer',
+        'role:customer',
         'subscribed'
     ])->group(function(){
+        $mainView = 'HomeController@mainView';
 
+        Route::get('/browse', $mainView);
+        Route::get('/favourites', $mainView);
+        Route::get('/artists', $mainView);
     });
 
     Route::prefix('/dashboard')
