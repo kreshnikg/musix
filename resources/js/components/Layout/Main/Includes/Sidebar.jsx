@@ -29,9 +29,13 @@ export default function Sidebar(props) {
                              link="/favourites"
                              icon="far fa-heart"/>
 
-                <SidebarItem title="Artistët"
-                             link="/artists"
-                             icon="far fa-user"/>
+                {/*<SidebarItem title="Artistët"*/}
+                {/*             link="/artists"*/}
+                {/*             icon="far fa-user"/>*/}
+
+                <SidebarItem title="Top lista"
+                             link="/top-songs"
+                             icon="fas fa-list-ol"/>
 
                 <li className="sidebar-item position-absolute w-100 text-center" style={{bottom: "20px"}}>
                     <form method="POST" action="/logout" id="logout-form" ref={logoutForm}>

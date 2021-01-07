@@ -8,7 +8,8 @@ import ScrollToTop from "../Utils/ScrollToTop";
 import Home from "../Home/Home";
 import Favourites from "../Favourites/Favourites";
 import Artists from "../Artists/Artists";
-
+import ArtistProfile from "../Artists/Profile";
+import TopSongs from "../TopSongs/TopSongs";
 
 function App(props) {
 
@@ -23,7 +24,9 @@ function App(props) {
                 <Switch>
                     <Route exact path='/' component={Home}/>
                     <Route exact path='/favourites' component={Favourites}/>
+                    <Route exact path='/top-songs' component={TopSongs}/>
                     <Route exact path='/artists' component={Artists}/>
+                    <Route exact path='/artists/:artistUrl' component={ArtistProfile}/>
                 </Switch>
             </MainLayout>
         </BrowserRouter>

@@ -3,7 +3,6 @@ import * as actionTypes from "../actionTypes/user";
 const initialState = {
     user: null,
     playingSong: null,
-    pausedAt: null
 }
 
 const user = (state = initialState, action) => {

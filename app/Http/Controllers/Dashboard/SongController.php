@@ -70,14 +70,14 @@ class SongController extends Controller
         $audioFile = $request->file('audio_file');
         $extension = $audioFile->getClientOriginalExtension();
         $fileNameToStore = Str::uuid() . '.' . $extension;
-        $path = $audioFile->storeAs('songs', $fileNameToStore);
+        $path = $audioFile->storeAs('public/songs', $fileNameToStore);
 
         \DB::transaction(function () use ($request, $path) {
             $song = new Song;
             $song->title = $request->input('title');
             $song->href = toURL($song->title);
             $song->release_date = $request->input('release_date');
-            $song->audio_file = $path;
+            $song->audio_file = str_replace("public/", "", $path);
             $song->duration = $request->input('audio_file_duration');
             $song->save();
 
@@ -157,7 +157,7 @@ class SongController extends Controller
             $audioFile = $request->file('audio_file');
             $extension = $audioFile->getClientOriginalExtension();
             $fileNameToStore = Str::uuid() . '.' . $extension;
-            $path = $audioFile->storeAs('songs', $fileNameToStore);
+            $path = $audioFile->storeAs('public/songs', $fileNameToStore);
         }
 
         \DB::transaction(function () use ($request, $path, $song) {
@@ -165,7 +165,7 @@ class SongController extends Controller
             $song->href = toURL($song->title);
             $song->release_date = $request->input('release_date');
             if($path) {
-                $song->audio_file = $path;
+                $song->audio_file = str_replace("public/", "", $path);
                 $song->duration = $request->input('audio_file_duration');
             }
             $song->save();

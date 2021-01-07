@@ -7,7 +7,7 @@
     width: 250px;
     left: 0;
     top: 0;
-    bottom: 120px;
+    bottom: 100px;
     position: fixed;
     z-index: 1000;
     overflow-x: hidden;
@@ -214,6 +214,10 @@
       text-decoration: none;
       color: white;
 
+      &.song-row-playing {
+        color: #da1c78 !important;
+      }
+
       .song-play-button {
         visibility: hidden;
         font-size: 20px;
@@ -234,14 +238,31 @@
     }
   }
 
-  .player {
-    height: 120px;
+  .player-container {
+    height: 100px;
     bottom: 0;
     width: 100%;
     background-color: #12192c;
     position: fixed;
-    display: flex;
     justify-content: center;
+    align-items: center;
+    display: flex;
+
+    .player {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .player-song-details {
+      left: 0;
+      position: absolute;
+      display: flex;
+      align-items: center;
+
+      i {
+        font-size: 26px;
+      }
+    }
 
     .control-buttons {
       display: flex;
@@ -251,6 +272,10 @@
         margin: 0 10px;
         font-size: 20px;
       }
+    }
+
+    .progress-bar {
+      background-color: #da1c78 !important;
     }
   }
 

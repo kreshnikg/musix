@@ -14,14 +14,20 @@ Route::middleware(['auth:api','role:customer'])->group(function() {
     Route::middleware('subscribed')->group(function () {
         Route::get('/home', 'SongController@latest');
 
+        Route::get('/song/{song}', 'SongController@play');
+
         #region Favourites
         Route::get('/favourites', 'FavouritesController@index');
-        Route::post('/favourites', 'FavouritesController@addSong');
+        Route::post('/favourites', 'FavouritesController@toggleSong');
         Route::post('/favourites/remove', 'FavouritesController@removeSong');
         #endregion
 
         #region Artists
         Route::get('/artists', 'ArtistController@index');
+        #endregion
+
+        #region TopSongs
+        Route::get('/top-songs', 'SongController@topSongs');
         #endregion
     });
 });

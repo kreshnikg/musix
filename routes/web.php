@@ -19,6 +19,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/browse', $mainView);
         Route::get('/favourites', $mainView);
         Route::get('/artists', $mainView);
+        Route::get('/top-songs', $mainView);
     });
 
     Route::prefix('/dashboard')
