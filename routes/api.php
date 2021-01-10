@@ -14,7 +14,10 @@ Route::middleware(['auth:api','role:customer'])->group(function() {
     Route::middleware('subscribed')->group(function () {
         Route::get('/home', 'SongController@latest');
 
+        Route::get('/songs/search', 'SongController@search');
         Route::get('/song/{song}', 'SongController@play');
+        Route::get('/song/{song}/next', 'SongController@playNext');
+        Route::get('/song/{song}/previous', 'SongController@playPrevious');
 
         #region Favourites
         Route::get('/favourites', 'FavouritesController@index');

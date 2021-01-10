@@ -41,9 +41,44 @@ class SongController extends Controller
         return response()->json([
             "song" => $song
         ]);
-//        $path = storage_path().DIRECTORY_SEPARATOR."app".DIRECTORY_SEPARATOR.$song->audio_file;
-//        $response = new BinaryFileResponse($path);
-//        BinaryFileResponse::trustXSendfileTypeHeader();
-//        return $response;
+    }
+
+    public function playNext($songId)
+    {
+        $song = Song::with(['artists'])->where('song_id', function ($query) use ($songId) {
+            $query->from('song')->selectRaw('min(song_id)')->where('song_id', '<', $songId);
+        })->first();
+        if (!empty($song)) {
+            $song->total_play_count = (int) $song->total_play_count + 1;
+            $song->save();
+        }
+        return response()->json([
+            "song" => $song
+        ]);
+    }
+
+    public function playPrevious($songId)
+    {
+        $song = Song::with(['artists'])->where('song_id', function ($query) use ($songId) {
+            $query->from('song')->selectRaw('min(song_id)')->where('song_id', '>', $songId);
+        })->first();
+        if (!empty($song)) {
+            $song->total_play_count = (int) $song->total_play_count + 1;
+            $song->save();
+        }
+        return response()->json([
+            "song" => $song
+        ]);
+    }
+
+    public function search()
+    {
+        $searchQuery = \Request::has('search') ? \Request::get('search') : null;
+        $songs = Song::with('artists')
+            ->where('title', 'like', "%$searchQuery%")
+            ->get();
+        return response()->json([
+            "songs" => $songs
+        ]);
     }
 }

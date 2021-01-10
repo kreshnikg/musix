@@ -10,6 +10,7 @@ import Favourites from "../Favourites/Favourites";
 import Artists from "../Artists/Artists";
 import ArtistProfile from "../Artists/Profile";
 import TopSongs from "../TopSongs/TopSongs";
+import Browse from "../Browse/Browse";
 
 function App(props) {
 
@@ -27,6 +28,7 @@ function App(props) {
                     <Route exact path='/top-songs' component={TopSongs}/>
                     <Route exact path='/artists' component={Artists}/>
                     <Route exact path='/artists/:artistUrl' component={ArtistProfile}/>
+                    <Route exact path='/browse' component={Browse}/>
                 </Switch>
             </MainLayout>
         </BrowserRouter>

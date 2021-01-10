@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {Howl, Howler} from 'howler';
 import {useDispatch, useSelector} from "react-redux";
-import {playNewSongRequest} from "../../actions/user"
+import {playNewSongRequest, playNextSongRequest, playPreviousSongRequest} from "../../actions/user"
 
 export default function Player(props) {
 
@@ -64,6 +64,16 @@ export default function Player(props) {
         return Math.floor((currentTime * 100) / duration)
     }
 
+    const playNextSong = () => {
+        if(playingSong)
+            dispatch(playNextSongRequest(playingSong.song_id))
+    }
+
+    const playPreviousSong = () => {
+        if(playingSong)
+            dispatch(playPreviousSongRequest(playingSong.song_id))
+    }
+
     return (
         <>
             <div className="player-container">
@@ -77,11 +87,13 @@ export default function Player(props) {
                 </div> }
                 <div className="player align-items-center">
                     <div className="control-buttons">
-                        <i className="fas fa-step-backward control-buttons-item" style={{fontSize: "15px"}}/>
+                        <i className="fas fa-step-backward control-buttons-item"
+                           onClick={playPreviousSong} style={{fontSize: "15px"}}/>
                         <i onClick={togglePause}
                            style={{fontSize: "30px"}}
                            className={`far fa-${state.playing ? "pause" : "play"}-circle control-buttons-item`}/>
-                        <i className="fas fa-step-forward control-buttons-item" style={{fontSize: "15px"}}/>
+                        <i className="fas fa-step-forward control-buttons-item"
+                           onClick={playNextSong} style={{fontSize: "15px"}}/>
                     </div>
                     <div className="d-flex align-items-center justify-content-center mt-3">
                         <span className="mr-3">{fmtMSS(currentTime)}</span>

@@ -11,6 +11,28 @@ export const playNewSongRequest = (songId) => {
     }
 }
 
+export const playNextSongRequest = (songId) => {
+    return dispatch => {
+        axios.get(`/api/song/${songId}/next`).then((response) => {
+            if(response.data.song)
+                dispatch(playNewSong(response.data.song))
+        }).catch((error) => {
+
+        })
+    }
+}
+
+export const playPreviousSongRequest = (songId) => {
+    return dispatch => {
+        axios.get(`/api/song/${songId}/previous`).then((response) => {
+            if(response.data.song)
+                dispatch(playNewSong(response.data.song))
+        }).catch((error) => {
+
+        })
+    }
+}
+
 export const playNewSong = (song) => {
     return {
         type: actionTypes.PLAY_NEW_SONG,
