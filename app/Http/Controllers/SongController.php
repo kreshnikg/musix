@@ -24,8 +24,8 @@ class SongController extends Controller
     {
         $songs = Song::with(['artists'])
             ->favourited(Auth::id())
-        ->orderBy('total_play_count', 'DESC')
-        ->get();
+            ->orderBy('total_play_count', 'DESC')
+            ->get();
 
         return response()->json([
             "songs" => $songs
@@ -35,7 +35,7 @@ class SongController extends Controller
     public function play($songId)
     {
         $song = Song::with(['artists'])->findOrFail($songId);
-        $song->total_play_count = (int) $song->total_play_count + 1;
+        $song->total_play_count = (int)$song->total_play_count + 1;
         $song->save();
 
         return response()->json([
@@ -49,7 +49,7 @@ class SongController extends Controller
             $query->from('song')->selectRaw('min(song_id)')->where('song_id', '<', $songId);
         })->first();
         if (!empty($song)) {
-            $song->total_play_count = (int) $song->total_play_count + 1;
+            $song->total_play_count = (int)$song->total_play_count + 1;
             $song->save();
         }
         return response()->json([
@@ -63,7 +63,7 @@ class SongController extends Controller
             $query->from('song')->selectRaw('min(song_id)')->where('song_id', '>', $songId);
         })->first();
         if (!empty($song)) {
-            $song->total_play_count = (int) $song->total_play_count + 1;
+            $song->total_play_count = (int)$song->total_play_count + 1;
             $song->save();
         }
         return response()->json([
@@ -74,9 +74,15 @@ class SongController extends Controller
     public function search()
     {
         $searchQuery = \Request::has('search') ? \Request::get('search') : null;
-        $songs = Song::with('artists')
-            ->where('title', 'like', "%$searchQuery%")
-            ->get();
+        $songs = Song::with(['artists', 'genres']);
+        if ($searchQuery)
+            $songs = $songs->where('title', 'like', "%$searchQuery%")
+                ->orWhereHas('artists', function ($query) use ($searchQuery) {
+                    $query->where('full_name', 'like', "%$searchQuery%");
+                })->orWhereHas('genres', function ($query) use ($searchQuery) {
+                    $query->where('title', 'like', "%$searchQuery%");
+                });
+        $songs = $songs->get();
         return response()->json([
             "songs" => $songs
         ]);

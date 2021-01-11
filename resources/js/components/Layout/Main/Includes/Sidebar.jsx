@@ -37,6 +37,10 @@ export default function Sidebar(props) {
                              link="/top-songs"
                              icon="fas fa-list-ol"/>
 
+                <SidebarItem title="Listat e mia"
+                             link="/playlists"
+                             icon="far fa-list-alt"/>
+
                 <li className="sidebar-item position-absolute w-100 text-center" style={{bottom: "20px"}}>
                     <form method="POST" action="/logout" id="logout-form" ref={logoutForm}>
                         <input type="hidden" name="_token" value={getCSRFToken()}/>

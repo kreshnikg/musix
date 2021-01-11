@@ -11,6 +11,7 @@ import Artists from "../Artists/Artists";
 import ArtistProfile from "../Artists/Profile";
 import TopSongs from "../TopSongs/TopSongs";
 import Browse from "../Browse/Browse";
+import Playlists from "../Playlists/Playlists";
 
 function App(props) {
 
@@ -29,6 +30,7 @@ function App(props) {
                     <Route exact path='/artists' component={Artists}/>
                     <Route exact path='/artists/:artistUrl' component={ArtistProfile}/>
                     <Route exact path='/browse' component={Browse}/>
+                    <Route exact path='/playlists' component={Playlists}/>
                 </Switch>
             </MainLayout>
         </BrowserRouter>

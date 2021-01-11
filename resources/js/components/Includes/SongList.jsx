@@ -35,6 +35,7 @@ export default function SongList(props) {
                 <th scope="col">Artistët</th>
                 <th scope="col">Data e publikimit</th>
                 <th scope="col"><i className="far fa-clock"/></th>
+                <th scope="col"/>
             </tr>
             </thead>
             <tbody>
@@ -52,8 +53,24 @@ export default function SongList(props) {
                         <td>{song.artists ? song.artists[0].full_name : "-"}</td>
                         <td>{song.release_date}</td>
                         <td>{fmtMSS(song.duration)}</td>
+                        <td>
+                            <div className="dropdown show">
+                                <a className="btn btn-sm btn-link p-0" href="#" role="button"
+                                   style={{fontSize: "16px", color: "white"}}
+                                   id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                                   aria-expanded="false">
+                                    <i className="fas fa-ellipsis-h"/>
+                                </a>
+
+                                <div className="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+                                    <a className="dropdown-item" href="#">Action</a>
+                                    <a className="dropdown-item" href="#">Another action</a>
+                                    <a className="dropdown-item" href="#">Something else here</a>
+                                </div>
+                            </div>
+                        </td>
                     </tr>
-                )
+                );
             })}
             </tbody>
         </table>
