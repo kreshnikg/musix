@@ -28,7 +28,7 @@ Route::middleware('auth')->group(function () {
         ->middleware('role:admin|manager')
         ->namespace('Dashboard')->group(function() {
 
-        Route::redirect("/", "/dashboard/statistics");
+        Route::redirect("/", "/dashboard/users");
 
         Route::get("/statistics","StatisticController@index");
         Route::resource('/songs','SongController');
