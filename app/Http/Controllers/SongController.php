@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Song;
 use Auth;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class SongController extends Controller
 {
@@ -46,7 +44,7 @@ class SongController extends Controller
     public function playNext($songId)
     {
         $song = Song::with(['artists'])->where('song_id', function ($query) use ($songId) {
-            $query->from('song')->selectRaw('min(song_id)')->where('song_id', '<', $songId);
+            $query->from('song')->selectRaw('max(song_id)')->where('song_id', '<', $songId);
         })->first();
         if (!empty($song)) {
             $song->total_play_count = (int)$song->total_play_count + 1;
@@ -74,7 +72,8 @@ class SongController extends Controller
     public function search()
     {
         $searchQuery = \Request::has('search') ? \Request::get('search') : null;
-        $songs = Song::with(['artists', 'genres']);
+        $songs = Song::with(['artists', 'genres'])
+            ->favourited(Auth::id());
         if ($searchQuery)
             $songs = $songs->where('title', 'like', "%$searchQuery%")
                 ->orWhereHas('artists', function ($query) use ($searchQuery) {

@@ -2,11 +2,13 @@ import React, {useState, useEffect} from 'react';
 import {playNewSongRequest} from "../../actions/user";
 import {useDispatch, useSelector} from "react-redux";
 import axios from "axios";
+import swal from "@sweetalert/with-react";
 
 export default function SongList(props) {
 
     const dispatch = useDispatch();
     const playingSong = useSelector(state => state.playingSong)
+    const playlists = useSelector(state => state.playlists)
 
     const isPlaying = (songId) => {
         if (playingSong === null) return undefined
@@ -23,6 +25,14 @@ export default function SongList(props) {
 
     const playSong = (song) => {
         dispatch(playNewSongRequest(song.song_id))
+    }
+
+    const addSongToPlaylist = (playlistId, songId) => {
+        axios.post(`/api/playlists/${playlistId}/add-song`, {
+            song_id: songId
+        }).then((response) => {
+            swal("Sukses!", "Lista u krijua me sukses!", "success",{ buttons: false,timer: 1500});
+        })
     }
 
     return (
@@ -61,11 +71,15 @@ export default function SongList(props) {
                                    aria-expanded="false">
                                     <i className="fas fa-ellipsis-h"/>
                                 </a>
-
                                 <div className="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                                    <a className="dropdown-item" href="#">Action</a>
-                                    <a className="dropdown-item" href="#">Another action</a>
-                                    <a className="dropdown-item" href="#">Something else here</a>
+                                    <span className="ml-2 text-primary">Shto në listën:</span>
+                                    {playlists.map((playlist) => {
+                                        return (
+                                            <a className="dropdown-item"
+                                               onClick={() => addSongToPlaylist(playlist.playlist_id, song.song_id)}
+                                               href="#">{playlist.title}</a>
+                                        )
+                                    })}
                                 </div>
                             </div>
                         </td>

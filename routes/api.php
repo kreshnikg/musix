@@ -32,5 +32,14 @@ Route::middleware(['auth:api','role:customer'])->group(function() {
         #region TopSongs
         Route::get('/top-songs', 'SongController@topSongs');
         #endregion
+
+        #region Playlisys
+        Route::get('/playlists', 'PlaylistController@index');
+        Route::post('/playlists', 'PlaylistController@store');
+        Route::post('/playlists/{playlist}/add-song', 'PlaylistController@addSong');
+        Route::post('/playlists/{playlist}/remove-song', 'PlaylistController@removeSong');
+        Route::get('/playlists/{playlist}', 'PlaylistController@show');
+        Route::delete('/playlists/{playlist}', 'PlaylistController@destroy');
+        #endregion
     });
 });

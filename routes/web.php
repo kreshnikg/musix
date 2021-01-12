@@ -21,6 +21,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/artists', $mainView);
         Route::get('/top-songs', $mainView);
         Route::get('/playlists', $mainView);
+        Route::get('/playlists/{playlist}', $mainView);
     });
 
     Route::prefix('/dashboard')

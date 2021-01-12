@@ -12,4 +12,13 @@ class PlaylistSong extends Model
     protected $table = 'playlist_song';
 
     protected $primaryKey = 'id';
+
+    public function song()
+    {
+        return $this->hasOne(
+            'App\Models\Song',
+            'song_id',
+            'song_id'
+        );
+    }
 }

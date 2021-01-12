@@ -203,6 +203,17 @@
     }
   }
 
+  .btn-purple-color {
+    background-color: #da1c78 !important;
+    border-color: #da1c78 !important;
+
+    &:hover {
+      transition-duration: 0.3s;
+      background-color: #da1c78 !important;
+      border-color: #da1c78 !important;
+    }
+  }
+
   .song-list-table {
     background-color: transparent;
 
