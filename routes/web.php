@@ -2,17 +2,45 @@
 
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+Route::get('/', 'HomeController@index');
 
-Route::get('/', function () {
-    return view('welcome');
+Auth::routes();
+
+Route::middleware('auth')->group(function () {
+
+    Route::get('/subscribe','HomeController@index');
+
+    Route::middleware([
+        'role:customer',
+        'subscribed'
+    ])->group(function(){
+        $mainView = 'HomeController@mainView';
+
+        Route::get('/browse', $mainView);
+        Route::get('/favourites', $mainView);
+        Route::get('/artists', $mainView);
+        Route::get('/top-songs', $mainView);
+        Route::get('/playlists', $mainView);
+        Route::get('/playlists/{playlist}', $mainView);
+    });
+
+    Route::prefix('/dashboard')
+        ->middleware('role:admin|manager')
+        ->namespace('Dashboard')->group(function() {
+
+        Route::redirect("/", "/dashboard/users");
+
+        Route::get("/statistics","StatisticController@index");
+        Route::resource('/songs','SongController');
+        Route::resource('/artists','ArtistController');
+        Route::resource('/genres','GenreController');
+
+        Route::middleware('role:admin')->group(function() {
+            Route::resource('/users','UserController');
+            Route::resource('/roles','RoleController');
+            Route::resource('/subscriptions','SubscriptionController');
+        });
+    });
 });
+
+

@@ -1,1 +1,14 @@
+/**
+ * First we will load all of this project's JavaScript dependencies which
+ * includes React and other helpers. It's a great starting point while
+ * building robust, powerful web applications using React + Laravel.
+ */
+
 require('./bootstrap');
+require('select2');
+require("./custom");
+require("./global");
+require("./components/Subscribe");
+require("./components/Root/App");
+require("./components/Root/Guest");
+
